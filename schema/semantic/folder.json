@@ -1,0 +1,17 @@
+{
+  "entity": "Folder",
+  "version": 1,
+  "description": "A directory in the project’s structure.",
+  "fields": [
+    { "name": "path", "type": "string" },
+    { "name": "label", "type": "string", "optional": true },
+    { "name": "role", "type": "string", "optional": true },
+    {
+      "name": "containsTypes",
+      "type": "reference[]",
+      "target": "FileType",
+      "optional": true
+    },
+    { "name": "schemaVersion", "type": "number" }
+  ]
+}

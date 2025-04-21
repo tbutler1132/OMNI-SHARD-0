@@ -1,0 +1,35 @@
+{
+  "entity": "Convergence",
+  "description": "A structured unit of intention — like a task, goal, idea, or action. Recursively composed and semantically aware.",
+  "version": "1",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string",
+      "description": "Unique identifier for this convergence."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "description": "A short title for this convergence.",
+      "prompt": "What is the name of this convergence?"
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "prompt": "What is this convergence about?"
+    },
+    {
+      "name": "time",
+      "type": "datetime",
+      "description": "When this convergence is scheduled to occur.",
+      "optional": true
+    },
+    {
+      "name": "status",
+      "type": "reference",
+      "target": "Status"
+    },
+    { "name": "schemaVersion", "type": "number" }
+  ]
+}

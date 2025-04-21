@@ -1,0 +1,44 @@
+[
+  {
+    "path": "app"
+  },
+  {
+    "path": "data"
+  },
+  {
+    "path": "data/entities"
+  },
+  {
+    "path": "data/entities/convergence"
+  },
+  {
+    "path": "data/entities/folder"
+  },
+  {
+    "path": "docs"
+  },
+  {
+    "path": "lib"
+  },
+  {
+    "path": "lib/semantic"
+  },
+  {
+    "path": "lib/semantic/schema"
+  },
+  {
+    "path": "public"
+  },
+  {
+    "path": "schema"
+  },
+  {
+    "path": "schema/semantic"
+  },
+  {
+    "path": "scripts"
+  },
+  {
+    "path": "types"
+  }
+]
