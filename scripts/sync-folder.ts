@@ -57,7 +57,7 @@ const syncFoldersToOntology = async () => {
     // Define the output file path
     const outputFilePath = path.join(
       projectRoot,
-      "data/entities/folder/folder.dev.json"
+      "data/entities/folder/folder.local.json"
     );
 
     // Ensure the directory exists
