@@ -1,44 +1,58 @@
 [
   {
-    "path": "app"
+    "path": "app",
+    "schemaVersion": 1
   },
   {
-    "path": "data"
+    "path": "data",
+    "schemaVersion": 1
   },
   {
-    "path": "data/entities"
+    "path": "data/entities",
+    "schemaVersion": 1
   },
   {
-    "path": "data/entities/convergence"
+    "path": "data/entities/convergence",
+    "schemaVersion": 1
   },
   {
-    "path": "data/entities/folder"
+    "path": "data/entities/folder",
+    "schemaVersion": 1
   },
   {
-    "path": "docs"
+    "path": "docs",
+    "schemaVersion": 1
   },
   {
-    "path": "lib"
+    "path": "lib",
+    "schemaVersion": 1
   },
   {
-    "path": "lib/semantic"
+    "path": "lib/semantic",
+    "schemaVersion": 1
   },
   {
-    "path": "lib/semantic/schema"
+    "path": "lib/semantic/schema",
+    "schemaVersion": 1
   },
   {
-    "path": "public"
+    "path": "public",
+    "schemaVersion": 1
   },
   {
-    "path": "schema"
+    "path": "schema",
+    "schemaVersion": 1
   },
   {
-    "path": "schema/semantic"
+    "path": "schema/semantic",
+    "schemaVersion": 1
   },
   {
-    "path": "scripts"
+    "path": "scripts",
+    "schemaVersion": 1
   },
   {
-    "path": "types"
+    "path": "types",
+    "schemaVersion": 1
   }
 ]

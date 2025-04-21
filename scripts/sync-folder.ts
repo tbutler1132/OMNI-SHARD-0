@@ -3,8 +3,10 @@ import * as path from "path";
 import { loadSchema } from "@/lib/semantic/schema/loadSchema";
 
 // Define schemaRules with example rules (replace with actual implementation or import)
+// TODO: This is a mess
 const schemaRules: { [key: string]: (folderPath: string) => string } = {
   path: (folderPath: string) => folderPath,
+  schemaVersion: (schemaVersion: string) => schemaVersion,
 };
 
 const syncFoldersToOntology = async () => {
@@ -30,6 +32,7 @@ const syncFoldersToOntology = async () => {
     // Load the folder schema
     const folderSchema = (await loadSchema("folder")) as {
       fields: { name: string }[];
+      version: string;
     };
     console.log("Folder Schema:", folderSchema);
 
@@ -43,8 +46,10 @@ const syncFoldersToOntology = async () => {
     const folderEntities = folders.map((folderPath) => {
       const entity: { [key: string]: string | undefined } = {};
       for (const field of folderSchema.fields) {
-        if (schemaRules[field.name]) {
+        if (field.name === "path") {
           entity[field.name] = schemaRules[field.name](folderPath);
+        } else if (field.name === "schemaVersion") {
+          entity[field.name] = schemaRules[field.name](folderSchema.version); // Example version
         } else {
           entity[field.name] = undefined; // Set undefined if no rule exists
         }
