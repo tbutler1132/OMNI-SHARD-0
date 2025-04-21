@@ -1,0 +1,19 @@
+- Schemas
+  - Convergence: Intent, outcome
+  - Folder: Stucture that contains a group of files
+  - File: A file in the engine's codebase
+  - File Type: A semantic category for a file (i.e. what type of thing it does)
+  - Status: A state of a process
+  - Horizon: A time-based frame over which outcomes can unfold
+  - Project: A unified project of code
+  - Proposal: Request to change an entity
+  - View:
+  - Route:
+  - Script: Executes a function
+  - Function: An action
+  - Post: A post to The Omnilith
+  - Beat: An instrumental
+  - Song: A full song
+  - Album: A cohesive collection of songs
+  - User:
+  - Protocol:
