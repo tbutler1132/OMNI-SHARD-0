@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "sync:folders": "tsx ./scripts/sync-folder.ts"
+    "sync:folders": "tsx ./scripts/sync-folder-objects.ts",
+    "sync:schemas": "tsx ./scripts/sync-schema-objects.ts"
   },
   "dependencies": {
     "next": "15.3.1",

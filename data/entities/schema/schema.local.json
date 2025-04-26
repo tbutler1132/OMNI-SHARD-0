@@ -1,0 +1,100 @@
+{
+  "schemas": [
+    {
+      "id": "schema-convergence-v1",
+      "targetEntity": "Convergence",
+      "version": "1",
+      "description": "A structured unit of intention — like a task, goal, idea, or action. Recursively composed and semantically aware.",
+      "fields": [
+        "field-convergence-id",
+        "field-convergence-title",
+        "field-convergence-description",
+        "field-convergence-time",
+        "field-convergence-status",
+        "field-convergence-schemaVersion"
+      ],
+      "path": "schema/ontology/convergence.json",
+      "createdAt": "2025-04-22T02:49:04.643Z",
+      "updatedAt": "2025-04-22T02:49:04.644Z",
+      "schemaVersion": 1
+    },
+    {
+      "id": "schema-fielddefinition-v1",
+      "targetEntity": "FieldDefinition",
+      "version": 1,
+      "description": "Describes how a specific field on an object is derived, edited, or validated.",
+      "fields": [
+        "field-fielddefinition-id",
+        "field-fielddefinition-targetEntity",
+        "field-fielddefinition-fieldName",
+        "field-fielddefinition-inputType",
+        "field-fielddefinition-outputType",
+        "field-fielddefinition-determinedBy",
+        "field-fielddefinition-governedBy",
+        "field-fielddefinition-requiresHuman",
+        "field-fielddefinition-autoPopulated",
+        "field-fielddefinition-optional",
+        "field-fielddefinition-schemaVersion"
+      ],
+      "path": "schema/ontology/fieldDefinition.json",
+      "createdAt": "2025-04-22T02:49:04.645Z",
+      "updatedAt": "2025-04-22T02:49:04.645Z",
+      "schemaVersion": 1
+    },
+    {
+      "id": "schema-folder-v1",
+      "targetEntity": "Folder",
+      "version": 1,
+      "description": "A directory in the project’s structure.",
+      "fields": [
+        "field-folder-path",
+        "field-folder-label",
+        "field-folder-role",
+        "field-folder-containsTypes",
+        "field-folder-schemaVersion"
+      ],
+      "path": "schema/ontology/folder.json",
+      "createdAt": "2025-04-22T02:49:04.645Z",
+      "updatedAt": "2025-04-22T02:49:04.645Z",
+      "schemaVersion": 1
+    },
+    {
+      "id": "schema-schema-v1",
+      "targetEntity": "Schema",
+      "version": 1,
+      "description": "Semantic record for the structure file that defines an ontology entity.",
+      "fields": [
+        "field-schema-id",
+        "field-schema-targetEntity",
+        "field-schema-version",
+        "field-schema-description",
+        "field-schema-fields",
+        "field-schema-path",
+        "field-schema-createdAt",
+        "field-schema-updatedAt",
+        "field-schema-schemaVersion"
+      ],
+      "path": "schema/ontology/schema.json",
+      "createdAt": "2025-04-22T02:49:04.646Z",
+      "updatedAt": "2025-04-22T02:49:04.646Z",
+      "schemaVersion": 1
+    },
+    {
+      "id": "schema-status-v1",
+      "targetEntity": "Status",
+      "version": 1,
+      "description": "Represents the lifecycle state of a Convergence.",
+      "fields": [
+        "field-status-id",
+        "field-status-label",
+        "field-status-description",
+        "field-status-color",
+        "field-status-icon"
+      ],
+      "path": "schema/ontology/status.json",
+      "createdAt": "2025-04-22T02:49:04.646Z",
+      "updatedAt": "2025-04-22T02:49:04.646Z",
+      "schemaVersion": 1
+    }
+  ]
+}
