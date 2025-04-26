@@ -1,0 +1,23 @@
+{
+  "entity": "Script",
+  "version": 1,
+  "description": "Represents an executable script that automates one or more Functions in the system.",
+  "fields": [
+    { "name": "id", "type": "string" },
+    { "name": "path", "type": "string" },
+    { "name": "description", "type": "string" },
+    {
+      "name": "linkedFunctions",
+      "type": "reference[]",
+      "target": "Function",
+      "optional": true
+    },
+    {
+      "name": "trigger",
+      "type": "enum",
+      "allowedValues": ["manual", "ci", "cron", "event"],
+      "optional": true
+    },
+    { "name": "schemaVersion", "type": "number" }
+  ]
+}

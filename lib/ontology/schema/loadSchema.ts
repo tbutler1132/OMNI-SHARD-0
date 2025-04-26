@@ -1,6 +1,11 @@
 import fs from "fs/promises";
 import path from "path";
 
+/**
+ * @semantic Function
+ * @id function-load-schema
+ * @description Loads a schema from the ontology directory.
+ */
 export async function loadSchema<T>(entity: string): Promise<T> {
   const schemaPath = path.resolve(
     __dirname,
