@@ -1,0 +1,32 @@
+[
+  {
+    "entity": "View",
+    "version": 1,
+    "description": "Represents a semantic description of what data to display or edit, how to organize it, and how to render it.",
+    "fields": [
+      { "name": "id", "type": "string" },
+      { "name": "name", "type": "string" },
+      { "name": "description", "type": "string", "optional": true },
+      { "name": "targetEntity", "type": "string" },
+      { "name": "layout", "type": "string" },
+      { "name": "fields", "type": "string[]" },
+      { "name": "fieldOverrides", "type": "object", "optional": true },
+      { "name": "filters", "type": "object", "optional": true },
+      { "name": "sort", "type": "object[]", "optional": true },
+      { "name": "groupBy", "type": "string", "optional": true },
+      {
+        "name": "actions",
+        "type": "reference[]",
+        "target": "Behavior",
+        "optional": true
+      },
+      {
+        "name": "rendererComponent",
+        "type": "reference",
+        "target": "File",
+        "optional": true
+      },
+      { "name": "schemaVersion", "type": "number" }
+    ]
+  }
+]
