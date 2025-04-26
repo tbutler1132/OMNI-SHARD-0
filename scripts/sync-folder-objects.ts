@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
-import { loadSchema } from "@/lib/semantic/schema/loadSchema";
+import { loadSchema } from "@/lib/ontology/schema/loadSchema";
 
 // Define schemaRules with example rules (replace with actual implementation or import)
 // TODO: This is a mess

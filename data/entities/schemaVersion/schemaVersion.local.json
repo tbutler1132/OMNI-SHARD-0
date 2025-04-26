@@ -1,0 +1,59 @@
+{
+  "schemaVersions": [
+    {
+      "id": "schemaVersion-convergence-v1",
+      "targetEntity": "Convergence",
+      "version": "1",
+      "schema": "schema-convergence-v1",
+      "changeSummary": "Auto‑generated snapshot.",
+      "precededBy": null,
+      "supersededBy": null,
+      "createdAt": "2025-04-22T02:49:04.644Z",
+      "schemaVersion": 1
+    },
+    {
+      "id": "schemaVersion-fielddefinition-v1",
+      "targetEntity": "FieldDefinition",
+      "version": 1,
+      "schema": "schema-fielddefinition-v1",
+      "changeSummary": "Auto‑generated snapshot.",
+      "precededBy": null,
+      "supersededBy": null,
+      "createdAt": "2025-04-22T02:49:04.645Z",
+      "schemaVersion": 1
+    },
+    {
+      "id": "schemaVersion-folder-v1",
+      "targetEntity": "Folder",
+      "version": 1,
+      "schema": "schema-folder-v1",
+      "changeSummary": "Auto‑generated snapshot.",
+      "precededBy": null,
+      "supersededBy": null,
+      "createdAt": "2025-04-22T02:49:04.645Z",
+      "schemaVersion": 1
+    },
+    {
+      "id": "schemaVersion-schema-v1",
+      "targetEntity": "Schema",
+      "version": 1,
+      "schema": "schema-schema-v1",
+      "changeSummary": "Auto‑generated snapshot.",
+      "precededBy": null,
+      "supersededBy": null,
+      "createdAt": "2025-04-22T02:49:04.646Z",
+      "schemaVersion": 1
+    },
+    {
+      "id": "schemaVersion-status-v1",
+      "targetEntity": "Status",
+      "version": 1,
+      "schema": "schema-status-v1",
+      "changeSummary": "Auto‑generated snapshot.",
+      "precededBy": null,
+      "supersededBy": null,
+      "createdAt": "2025-04-22T02:49:04.646Z",
+      "schemaVersion": 1
+    }
+  ]
+}

@@ -28,11 +28,11 @@
     "schemaVersion": 1
   },
   {
-    "path": "lib/semantic",
+    "path": "lib/ontology",
     "schemaVersion": 1
   },
   {
-    "path": "lib/semantic/schema",
+    "path": "lib/ontology/schema",
     "schemaVersion": 1
   },
   {
@@ -44,7 +44,7 @@
     "schemaVersion": 1
   },
   {
-    "path": "schema/semantic",
+    "path": "schema/ontology",
     "schemaVersion": 1
   },
   {

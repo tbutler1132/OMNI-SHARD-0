@@ -1,0 +1,42 @@
+{
+  "entity": "Function",
+  "version": 1,
+  "description": "Represents a transformation behavior. May be atomic or composed of other Functions.",
+  "fields": [
+    { "name": "id", "type": "string" },
+    { "name": "name", "type": "string" },
+    { "name": "description", "type": "string" },
+    { "name": "inputType", "type": "string", "optional": true },
+    { "name": "outputType", "type": "string", "optional": true },
+    {
+      "name": "implementedIn",
+      "type": "reference",
+      "target": "Artifact",
+      "optional": true
+    },
+    {
+      "name": "dependsOn",
+      "type": "reference[]",
+      "target": "Function",
+      "optional": true
+    },
+    {
+      "name": "composedOf",
+      "type": "reference[]",
+      "target": "Function",
+      "optional": true
+    },
+    {
+      "name": "status",
+      "type": "enum",
+      "allowedValues": ["conceptual", "implemented"],
+      "optional": true
+    },
+    {
+      "name": "implementationType",
+      "type": "enum",
+      "allowedValues": ["code", "manual", "agent", "hybrid"]
+    },
+    { "name": "schemaVersion", "type": "number" }
+  ]
+}
