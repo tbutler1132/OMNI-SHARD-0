@@ -30,7 +30,7 @@
     "description": "Displays all Convergences ordered by createdAt descending.",
     "targetEntity": "convergence",
     "layout": "list",
-    "fields": ["title", "description", "time"],
+    "fields": ["title", "description", "time", "id"],
     "fieldOverrides": {
       "time": {
         "inputType": "datetime"
@@ -40,6 +40,23 @@
     "sort": [{ "field": "createdAt", "order": "desc" }],
     "groupBy": null,
     "actions": [],
+    "rendererComponent": null,
+    "schemaVersion": 1
+  },
+  {
+    "id": "view-edit-convergence",
+    "entity": "View",
+    "version": 1,
+    "name": "Edit Convergence",
+    "description": "Form for editing an existing Convergence.",
+    "targetEntity": "convergence",
+    "layout": "form",
+    "fields": ["title", "description", "time"],
+    "fieldOverrides": {},
+    "filters": {},
+    "sort": [],
+    "groupBy": null,
+    "actions": ["behavior-update-entity"],
     "rendererComponent": null,
     "schemaVersion": 1
   }

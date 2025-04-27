@@ -4,7 +4,7 @@ import { query } from "./db";
  * @id behavior-save-entity
  * @description Saves the entity in the database.
  */
-export async function saveEntity(
+export async function insertEntity(
   targetEntity: string,
   entity: Record<string, unknown>
 ) {
