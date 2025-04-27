@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { View } from "../../types/ontology/view"; // your generated View types
-// import { createEntity } from "@/lib/create-entity";
+import { createEntity } from "../../lib/ontology/actions"; // your function to create entities
 
 interface FormRendererProps {
   view: View;
@@ -23,7 +23,7 @@ export function FormRenderer({ view }: FormRendererProps) {
       const actionId = view.actions[0];
       console.log("Action ID:", actionId);
       console.log("Form State:", formState);
-      //   await createEntity(view.targetEntity, formState, actionId);
+      await createEntity(view.targetEntity, formState);
     } else {
       console.warn("No action linked to View. Cannot submit form.");
     }

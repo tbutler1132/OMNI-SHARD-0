@@ -3,13 +3,13 @@
     "id": "view-create-convergence",
     "name": "Create New Convergence",
     "description": "Form to create a new Convergence by providing title, time, horizon, priority, and status.",
-    "targetEntity": "Convergence",
+    "targetEntity": "convergence",
     "layout": "form",
     "fields": ["title", "description", "time", "status"],
     "fieldOverrides": {
       "status": {
         "inputType": "select",
-        "options": ["not-started", "in-progress", "completed"]
+        "options": ["not-started", "completed"]
       },
       "time": {
         "inputType": "datetime"
@@ -18,7 +18,7 @@
     "filters": {},
     "sort": [],
     "groupBy": null,
-    "actions": ["function-create-convergence"],
+    "actions": ["behavior-create-convergence"],
     "rendererComponent": "artifact-form-renderer",
     "schemaVersion": 1
   }

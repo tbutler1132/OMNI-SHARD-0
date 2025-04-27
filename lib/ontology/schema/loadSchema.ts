@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 
+//TODO: Move this into loadEntity.ts
 /**
  * @semantic Function
  * @id function-load-schema
