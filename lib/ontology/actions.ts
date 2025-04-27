@@ -1,4 +1,5 @@
-import { validateEntityData } from "./validation/validateEntityData";
+"use server";
+
 import { saveEntity } from "./saveEntity";
 
 /**
@@ -10,7 +11,7 @@ export async function createEntity(
   targetEntity: string,
   data: Record<string, unknown>
 ) {
-  validateEntityData(targetEntity, data);
+  //TODO: Add validation against the schema
 
   const entity = {
     id: `${targetEntity}-${Date.now()}`,
