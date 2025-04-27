@@ -21,5 +21,26 @@
     "actions": ["behavior-create-convergence"],
     "rendererComponent": "artifact-form-renderer",
     "schemaVersion": 1
+  },
+  {
+    "id": "view-list-convergences",
+    "entity": "View",
+    "version": 1,
+    "name": "List of Convergences",
+    "description": "Displays all Convergences ordered by createdAt descending.",
+    "targetEntity": "convergence",
+    "layout": "list",
+    "fields": ["title", "description", "time"],
+    "fieldOverrides": {
+      "time": {
+        "inputType": "datetime"
+      }
+    },
+    "filters": {},
+    "sort": [{ "field": "createdAt", "order": "desc" }],
+    "groupBy": null,
+    "actions": [],
+    "rendererComponent": null,
+    "schemaVersion": 1
   }
 ]
