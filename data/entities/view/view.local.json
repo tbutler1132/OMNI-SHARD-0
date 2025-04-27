@@ -1,0 +1,63 @@
+[
+  {
+    "id": "view-create-convergence",
+    "name": "Create New Convergence",
+    "description": "Form to create a new Convergence by providing title, time, horizon, priority, and status.",
+    "targetEntity": "convergence",
+    "layout": "form",
+    "fields": ["title", "description", "time", "status"],
+    "fieldOverrides": {
+      "status": {
+        "inputType": "select",
+        "options": ["not-started", "completed"]
+      },
+      "time": {
+        "inputType": "datetime"
+      }
+    },
+    "filters": {},
+    "sort": [],
+    "groupBy": null,
+    "actions": ["behavior-create-convergence"],
+    "rendererComponent": "artifact-form-renderer",
+    "schemaVersion": 1
+  },
+  {
+    "id": "view-list-convergences",
+    "entity": "View",
+    "version": 1,
+    "name": "List of Convergences",
+    "description": "Displays all Convergences ordered by createdAt descending.",
+    "targetEntity": "convergence",
+    "layout": "list",
+    "fields": ["title", "description", "time", "id"],
+    "fieldOverrides": {
+      "time": {
+        "inputType": "datetime"
+      }
+    },
+    "filters": {},
+    "sort": [{ "field": "createdAt", "order": "desc" }],
+    "groupBy": null,
+    "actions": [],
+    "rendererComponent": null,
+    "schemaVersion": 1
+  },
+  {
+    "id": "view-edit-convergence",
+    "entity": "View",
+    "version": 1,
+    "name": "Edit Convergence",
+    "description": "Form for editing an existing Convergence.",
+    "targetEntity": "convergence",
+    "layout": "form",
+    "fields": ["title", "description", "time"],
+    "fieldOverrides": {},
+    "filters": {},
+    "sort": [],
+    "groupBy": null,
+    "actions": ["behavior-update-entity"],
+    "rendererComponent": null,
+    "schemaVersion": 1
+  }
+]
