@@ -26,9 +26,21 @@
       "optional": true
     },
     {
+      "name": "vector",
+      "type": "boolean",
+      "description": "Whether this convergence is a vector."
+    },
+    {
+      "name": "temporality",
+      "type": "enum",
+      "allowedValues": ["present", "future"]
+    },
+
+    {
       "name": "status",
-      "type": "reference",
-      "target": "Status"
+      "type": "enum",
+      "allowedValues": ["not-started", "done"],
+      "optional": true
     },
     { "name": "schemaVersion", "type": "number" }
   ]
