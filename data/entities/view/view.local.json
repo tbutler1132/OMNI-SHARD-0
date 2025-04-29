@@ -5,11 +5,18 @@
     "description": "Form to create a new Convergence by providing title, time, horizon, priority, and status.",
     "targetEntity": "convergence",
     "layout": "form",
-    "fields": ["title", "description", "time", "status"],
+    "fields": ["title", "description", "time", "status", "priority", "vector"],
     "fieldOverrides": {
       "status": {
         "inputType": "select",
         "options": ["not-started", "completed"]
+      },
+      "vector": {
+        "inputType": "checkbox"
+      },
+      "priority": {
+        "inputType": "select",
+        "options": ["low", "medium", "high"]
       },
       "time": {
         "inputType": "datetime"
@@ -30,7 +37,15 @@
     "description": "Displays all Convergences ordered by createdAt descending.",
     "targetEntity": "convergence",
     "layout": "list",
-    "fields": ["title", "description", "time", "id"],
+    "fields": [
+      "title",
+      "description",
+      "time",
+      "id",
+      "context",
+      "priority",
+      "vector"
+    ],
     "fieldOverrides": {
       "time": {
         "inputType": "datetime"
@@ -57,6 +72,35 @@
     "sort": [],
     "groupBy": null,
     "actions": ["behavior-update-entity"],
+    "rendererComponent": null,
+    "schemaVersion": 1
+  },
+  {
+    "id": "view-list-convergences",
+    "entity": "View",
+    "version": 1,
+    "name": "List of Convergences",
+    "description": "Displays all Convergences ordered by createdAt descending.",
+    "targetEntity": "convergence",
+    "layout": "list",
+    "fields": [
+      "title",
+      "description",
+      "time",
+      "id",
+      "context",
+      "priority",
+      "vector"
+    ],
+    "fieldOverrides": {
+      "time": {
+        "inputType": "datetime"
+      }
+    },
+    "filters": {},
+    "sort": [{ "field": "createdAt", "order": "desc" }],
+    "groupBy": null,
+    "actions": [],
     "rendererComponent": null,
     "schemaVersion": 1
   }

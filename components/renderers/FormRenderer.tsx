@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { View } from "../../types/ontology/view";
 import { createEntity, updateEntity } from "../../lib/ontology/actions";
+import { FieldInput } from "../FieldInput";
 
 interface FormRendererProps {
   view: View;
@@ -55,51 +56,18 @@ export function FormRenderer({
         const inputType = override?.inputType ?? "text";
         const value = formState[fieldName] ?? "";
 
-        if (inputType === "select") {
-          return (
-            <div key={fieldName} className="flex flex-col">
-              <label className="text-sm font-medium">{fieldName}</label>
-              <select
-                className="border p-2 rounded"
-                value={value as string}
-                onChange={(e) => handleChange(fieldName, e.target.value)}
-              >
-                {override?.options?.map((option: string) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-          );
-        }
-
-        if (inputType === "datetime") {
-          return (
-            <div key={fieldName} className="flex flex-col">
-              <label className="text-sm font-medium">{fieldName}</label>
-              <input
-                type="datetime-local"
-                className="border p-2 rounded"
-                value={value as string}
-                onChange={(e) => handleChange(fieldName, e.target.value)}
-              />
-            </div>
-          );
-        }
-
         return (
-          <div key={fieldName} className="flex flex-col">
-            <label className="text-sm font-medium">{fieldName}</label>
-            <input
-              type="text"
-              className="border p-2 rounded"
-              value={value as string}
-              onChange={(e) => handleChange(fieldName, e.target.value)}
-            />
-          </div>
+          <FieldInput
+            key={fieldName}
+            fieldName={fieldName}
+            inputType={inputType}
+            value={value}
+            onChange={handleChange}
+            override={override}
+          />
         );
       })}
+
       <button
         type="submit"
         className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition"
