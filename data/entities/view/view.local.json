@@ -5,7 +5,16 @@
     "description": "Form to create a new Convergence by providing title, time, horizon, priority, and status.",
     "targetEntity": "convergence",
     "layout": "form",
-    "fields": ["title", "description", "time", "status", "priority", "vector"],
+    "fields": [
+      "title",
+      "description",
+      "time",
+      "status",
+      "priority",
+      "vector",
+      "temporality",
+      "context"
+    ],
     "fieldOverrides": {
       "status": {
         "inputType": "select",
@@ -20,6 +29,14 @@
       },
       "time": {
         "inputType": "datetime"
+      },
+      "temporality": {
+        "inputType": "select",
+        "options": ["present", "future"]
+      },
+      "context": {
+        "inputType": "select",
+        "options": ["AM", "PM", "Weekend", "Late", "Work"]
       }
     },
     "filters": {},

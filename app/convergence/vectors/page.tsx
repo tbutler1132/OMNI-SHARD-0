@@ -8,6 +8,7 @@ const page = async () => {
 
   return (
     <div className="p-6">
+      <h1 className="font-orbitron text-xl text-cyan-400">{view.name}</h1>
       <BoardRenderer view={view} data={data} />
     </div>
   );

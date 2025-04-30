@@ -1,6 +1,7 @@
 import styles from "./BoardRenderer.module.css";
 import { groupBy } from "lodash";
 import { View } from "@/types/ontology/view";
+import Link from "next/link";
 
 interface BoardRendererProps {
   view: View;
@@ -24,15 +25,21 @@ export function BoardRenderer({ view, data }: BoardRendererProps) {
 
   const renderCard = (
     item: Record<string, string | number | boolean | null | undefined>
-  ) => (
-    <div key={String(item.id)} className={styles.card}>
-      {view.fields.map((field) => (
-        <div key={field} className={styles.cardField}>
-          <strong>{field}:</strong> {String(item[field])}
+  ) => {
+    const id = String(item.id);
+
+    return (
+      <Link href={`/convergence/${id}`} key={id} className={styles.cardLink}>
+        <div className={styles.card}>
+          {view.fields.map((field) => (
+            <div key={field} className={styles.cardField}>
+              <strong>{field}:</strong> {String(item[field])}
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-  );
+      </Link>
+    );
+  };
 
   return (
     <div className={styles.boardWrapper}>
