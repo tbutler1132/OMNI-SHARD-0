@@ -1,16 +1,57 @@
 export interface View {
   id: string;
+  entity: "View";
+  version: number;
   name: string;
   description?: string;
   targetEntity: string;
-  layout: string; // "table", "kanban", "calendar", "form", etc.
-  fields: string[]; // List of field names
-  fieldOverrides?: Record<string, FieldOverride>; // Map of fieldName → override config
-  filters?: Record<string, unknown>; // Optional default filters
-  sort?: SortOrder[]; // Optional sort config
-  groupBy?: string | null; // Field to group by
-  actions?: string[]; // Linked Function IDs
-  rendererComponent?: string; // Optional Artifact ID for custom renderer
+  layout: "list" | "board" | "calendar" | "gallery" | string;
+
+  fields: string[];
+  fieldOverrides?: {
+    [fieldName: string]: {
+      inputType?: string;
+      options?: string[];
+      target?: string;
+    };
+  };
+
+  filters?: {
+    field: string;
+    operator:
+      | "equals"
+      | "notEquals"
+      | "in"
+      | "notIn"
+      | "isNull"
+      | "isNotNull"
+      | "gt"
+      | "lt"
+      | "gte"
+      | "lte"
+      | "contains";
+    value?: string | number | boolean | string[] | number[];
+  }[];
+
+  sort?: {
+    field: string;
+    order: "asc" | "desc";
+  }[];
+
+  groupBy?: {
+    field: string;
+    order?: string[];
+    labels?: Record<string, string>;
+  };
+
+  subGroupBy?: {
+    field: string;
+    order?: string[];
+    labels?: Record<string, string>;
+  };
+
+  actions?: string[];
+  rendererComponent?: string | null;
   schemaVersion: number;
 }
 

@@ -1,0 +1,58 @@
+.boardWrapper {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding: 1rem;
+}
+
+.column {
+  min-width: 250px;
+  background-color: #f9fafb;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.05);
+}
+
+.columnHeader {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: #374151;
+}
+
+.subGroupWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.subGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.subGroupHeader {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+.card:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.card {
+  background-color: #ffffff;
+  color: #1f2937; /* Tailwind's gray-800, readable dark gray */
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s;
+}
+
+.cardField {
+  font-size: 0.875rem;
+  color: inherit; /* Inherit from .card or override if needed */
+}

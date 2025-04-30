@@ -30,6 +30,31 @@
     "schemaVersion": 1
   },
   {
+    "id": "view-detail-convergence",
+    "entity": "View",
+    "version": 1,
+    "name": "Detail Convergence",
+    "description": "Displays details of a Convergence.",
+    "targetEntity": "convergence",
+    "layout": "detail",
+    "fields": [
+      "title",
+      "description",
+      "time",
+      "id",
+      "context",
+      "priority",
+      "vector"
+    ],
+    "fieldOverrides": {},
+    "filters": {},
+    "sort": [],
+    "groupBy": null,
+    "actions": [],
+    "rendererComponent": null,
+    "schemaVersion": 1
+  },
+  {
     "id": "view-list-convergences",
     "entity": "View",
     "version": 1,
@@ -100,6 +125,62 @@
     "filters": {},
     "sort": [{ "field": "createdAt", "order": "desc" }],
     "groupBy": null,
+    "actions": [],
+    "rendererComponent": null,
+    "schemaVersion": 1
+  },
+  {
+    "id": "view-vector-convergences",
+    "entity": "View",
+    "version": 1,
+    "name": "Main vector matrix",
+    "description": "Display vector matrix",
+    "targetEntity": "convergence",
+    "layout": "board",
+    "fields": ["title"],
+    "fieldOverrides": {},
+    "filters": [
+      {
+        "field": "vector",
+        "operator": "equals",
+        "value": true
+      },
+      {
+        "field": "temporality",
+        "operator": "equals",
+        "value": "present"
+      },
+      {
+        "field": "status",
+        "operator": "notEquals",
+        "value": "completed"
+      },
+      {
+        "field": "priority",
+        "operator": "isNotNull"
+      }
+    ],
+    "sort": [{ "field": "createdAt", "order": "desc" }],
+    "groupBy": {
+      "field": "priority",
+      "order": ["high", "medium", "low"],
+      "labels": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      }
+    },
+    "subGroupBy": {
+      "field": "context",
+      "order": ["AM", "PM", "Weekend", "Late", "Work"],
+      "labels": {
+        "AM": "AM",
+        "PM": "PM",
+        "Weekend": "Weekend",
+        "Late": "Late",
+        "Work": "Work"
+      }
+    },
     "actions": [],
     "rendererComponent": null,
     "schemaVersion": 1
