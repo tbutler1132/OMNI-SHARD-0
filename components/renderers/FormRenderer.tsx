@@ -3,20 +3,30 @@
 import { useState } from "react";
 import { View } from "../../types/ontology/view";
 import { createEntity, updateEntity } from "../../lib/ontology/actions";
+import { FieldInput } from "../FieldInput";
+import styles from "./FormRenderer.module.css";
 
 interface FormRendererProps {
   view: View;
   initialValues?: Record<string, unknown>;
   mode?: "create" | "edit";
+  onSuccess?: () => void;
+  onError?: (err: Error) => void;
 }
 
 export function FormRenderer({
   view,
   initialValues = {},
   mode = "create",
+  onSuccess,
+  onError,
 }: FormRendererProps) {
   const [formState, setFormState] =
     useState<Record<string, unknown>>(initialValues);
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (field: string, value: unknown) => {
     setFormState((prev) => ({ ...prev, [field]: value }));
@@ -24,87 +34,73 @@ export function FormRenderer({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setStatus("submitting");
+    setError(null);
 
-    if (view.actions && view.actions.length > 0) {
-      const actionId = view.actions[0];
-      console.log("Action ID:", actionId);
-      console.log("Form State:", formState);
-
-      if (mode === "create") {
-        await createEntity(view.targetEntity, formState);
-      } else if (mode === "edit") {
-        if (!initialValues?.id) {
-          console.warn("No ID provided for edit mode.");
-          return;
+    try {
+      if (view.actions && view.actions.length > 0) {
+        if (mode === "create") {
+          await createEntity(view.targetEntity, formState);
+        } else if (mode === "edit") {
+          if (!initialValues?.id) {
+            throw new Error("No ID provided for edit mode.");
+          }
+          await updateEntity(
+            view.targetEntity,
+            initialValues.id as string,
+            formState
+          );
         }
-        await updateEntity(
-          view.targetEntity,
-          initialValues.id as string,
-          formState
-        );
+        setStatus("success");
+        if (onSuccess) onSuccess();
+      } else {
+        throw new Error("No action linked to View.");
       }
-    } else {
-      console.warn("No action linked to View. Cannot submit form.");
+    } catch (err) {
+      setStatus("error");
+      const message = err instanceof Error ? err.message : "Unknown error";
+      setError(message);
+      if (onError && err instanceof Error) onError(err);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 p-4">
+    <form onSubmit={handleSubmit} className={styles.formWrapper}>
+      {status === "success" && (
+        <div className={styles.success}>✅ Saved successfully!</div>
+      )}
+
+      {status === "error" && error && (
+        <div className={styles.error}>⚠️ {error}</div>
+      )}
+
       {view.fields.map((fieldName) => {
         const override = view.fieldOverrides?.[fieldName];
         const inputType = override?.inputType ?? "text";
         const value = formState[fieldName] ?? "";
 
-        if (inputType === "select") {
-          return (
-            <div key={fieldName} className="flex flex-col">
-              <label className="text-sm font-medium">{fieldName}</label>
-              <select
-                className="border p-2 rounded"
-                value={value as string}
-                onChange={(e) => handleChange(fieldName, e.target.value)}
-              >
-                {override?.options?.map((option: string) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-          );
-        }
-
-        if (inputType === "datetime") {
-          return (
-            <div key={fieldName} className="flex flex-col">
-              <label className="text-sm font-medium">{fieldName}</label>
-              <input
-                type="datetime-local"
-                className="border p-2 rounded"
-                value={value as string}
-                onChange={(e) => handleChange(fieldName, e.target.value)}
-              />
-            </div>
-          );
-        }
-
         return (
-          <div key={fieldName} className="flex flex-col">
-            <label className="text-sm font-medium">{fieldName}</label>
-            <input
-              type="text"
-              className="border p-2 rounded"
-              value={value as string}
-              onChange={(e) => handleChange(fieldName, e.target.value)}
-            />
-          </div>
+          <FieldInput
+            key={fieldName}
+            fieldName={fieldName}
+            inputType={inputType}
+            value={value}
+            onChange={handleChange}
+            override={override}
+          />
         );
       })}
+
       <button
         type="submit"
-        className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition"
+        className={styles.submitButton}
+        disabled={status === "submitting"}
       >
-        {mode === "edit" ? "Update" : "Create"}
+        {status === "submitting"
+          ? "Saving..."
+          : mode === "edit"
+          ? "Update"
+          : "Create"}
       </button>
     </form>
   );

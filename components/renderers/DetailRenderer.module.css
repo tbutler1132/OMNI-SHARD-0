@@ -1,0 +1,45 @@
+.wrapper {
+  background: radial-gradient(ellipse at top, #0f0f23 0%, #000000 100%);
+  padding: 2rem;
+  border-radius: 1rem;
+  border: 1px solid #1e1e2f;
+  box-shadow: 0 0 12px #00ffe0cc;
+  font-family: "Share Tech Mono", monospace;
+  color: #d9faff;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.fieldBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-left: 2px solid #00ffe0;
+  padding-left: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.label {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: #86f3ff;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.value {
+  font-size: 1rem;
+  color: #f2f2f2;
+  text-shadow: 0 0 4px #00ffe0aa;
+  animation: pulse-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-glow {
+  0% {
+    text-shadow: 0 0 4px #00ffe0aa;
+  }
+  100% {
+    text-shadow: 0 0 10px #00ffe0ff;
+  }
+}

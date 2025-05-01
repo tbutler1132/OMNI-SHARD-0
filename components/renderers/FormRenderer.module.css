@@ -1,0 +1,51 @@
+.formWrapper {
+  background: linear-gradient(to bottom right, #0a0a1f, #000000);
+  border: 1px solid #1e1e2f;
+  padding: 2rem;
+  border-radius: 1rem;
+  font-family: "Share Tech Mono", monospace;
+  color: #d9faff;
+  box-shadow: 0 0 12px #00ffe0cc;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.success {
+  color: #00ff9a;
+  font-size: 0.85rem;
+  background: rgba(0, 255, 154, 0.1);
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.error {
+  color: #ff4d4d;
+  font-size: 0.85rem;
+  background: rgba(255, 77, 77, 0.1);
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.submitButton {
+  background: #00ffe0;
+  color: #0a0a1f;
+  font-weight: bold;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-family: inherit;
+}
+
+.submitButton:hover {
+  background: #00ffd0;
+  box-shadow: 0 0 6px #00ffe0aa;
+}
+
+.submitButton:disabled {
+  background: #444;
+  color: #888;
+  cursor: not-allowed;
+}
