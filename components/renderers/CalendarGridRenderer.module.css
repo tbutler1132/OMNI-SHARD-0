@@ -1,0 +1,68 @@
+.gridWrapper {
+  background: #0a0a1f;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #00ffe055;
+  font-family: "Share Tech Mono", monospace;
+}
+
+.headerRow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 0.5rem;
+}
+
+.headerCell {
+  text-align: center;
+  color: #00ffe0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid #1e1e2f;
+}
+
+.gridBody {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+}
+
+.dayCell {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid #1f1f3f;
+  border-radius: 8px;
+  padding: 0.5rem;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dateNumber {
+  font-size: 0.75rem;
+  color: #86f3ff;
+  margin-bottom: 0.25rem;
+  text-align: right;
+}
+
+.eventCard {
+  background: #111132;
+  padding: 0.3rem 0.4rem;
+  border-radius: 4px;
+  color: #d9faff;
+  text-decoration: none;
+  box-shadow: 0 0 6px #00ffe033;
+  transition: all 0.2s;
+  font-size: 0.75rem;
+}
+
+.eventCard:hover {
+  box-shadow: 0 0 10px #00ffe0aa;
+  transform: translateY(-1px);
+}
+
+.eventField {
+  line-height: 1.1;
+  color: #d9faff;
+}
