@@ -70,7 +70,9 @@ export default async function RendererWrapper({
     case "calendar":
       return <CalendarRenderer view={view} data={data} />;
     case "detail":
-      return <DetailRenderer view={view} data={data[0]} />;
+      const entity =
+        entityId && (await loadEntityById(view.targetEntity, entityId));
+      return <DetailRenderer view={view} data={entity} />;
     default:
       return <div>⚠️ No renderer found for layout: {layout}</div>;
   }
