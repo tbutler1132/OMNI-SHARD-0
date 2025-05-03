@@ -8,6 +8,7 @@ interface FieldInputProps {
   value: unknown;
   onChange: (field: string, value: unknown) => void;
   override?: { options?: string[] };
+  targetEntity?: string;
 }
 
 export function FieldInput({
@@ -16,24 +17,19 @@ export function FieldInput({
   value,
   onChange,
   override,
+  targetEntity,
 }: FieldInputProps) {
   const [options, setOptions] = useState<{ id: string; label: string }[]>([]);
 
-  // Optionally fetch options if it's a reference field
+  //TODO: Use react-query or swr for data fetching
   useEffect(() => {
-    if (
-      inputType === "reference-select" ||
-      inputType === "reference-multi-select"
-    ) {
-      // TODO: Replace with your real DB fetch!
-      setOptions([
-        { id: "example-1", label: "Example 1" },
-        { id: "example-2", label: "Example 2" },
-      ]);
+    if (inputType === "reference-select" && targetEntity) {
+      fetch(`/api/reference-options?entity=${targetEntity}`)
+        .then((res) => res.json())
+        .then((opts) => setOptions(opts));
     }
-  }, [inputType]);
+  }, [inputType, targetEntity]);
 
-  // Render fields based on inputType
   switch (inputType) {
     case "select":
       return (
@@ -44,31 +40,38 @@ export function FieldInput({
             value={value as string}
             onChange={(e) => onChange(fieldName, e.target.value)}
           >
-            {override?.options?.map((option: string) => (
-              <option key={option} value={option}>
-                {option}
+            <option value="">Select...</option>
+            {override?.options?.map((opt) => (
+              <option key={opt} value={opt}>
+                {opt}
               </option>
             ))}
           </select>
         </div>
       );
 
-    case "number":
+    case "reference-select":
       return (
         <div className="flex flex-col">
           <label className="text-sm font-medium">{fieldName}</label>
-          <input
-            type="number"
+          <select
             className="border p-2 rounded"
-            value={value as number}
-            onChange={(e) => onChange(fieldName, Number(e.target.value))}
-          />
+            value={value as string}
+            onChange={(e) => onChange(fieldName, e.target.value)}
+          >
+            <option value="">Select...</option>
+            {options.map((opt) => (
+              <option key={opt.id} value={opt.id}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
         </div>
       );
 
     case "checkbox":
       return (
-        <div className="flex flex-row items-center space-x-2">
+        <div className="flex items-center gap-2">
           <input
             type="checkbox"
             checked={Boolean(value)}
@@ -87,43 +90,6 @@ export function FieldInput({
             className="border p-2 rounded"
             value={value as string}
             onChange={(e) => onChange(fieldName, e.target.value)}
-          />
-        </div>
-      );
-
-    case "reference-select":
-      return (
-        <div className="flex flex-col">
-          <label className="text-sm font-medium">{fieldName}</label>
-          <select
-            className="border p-2 rounded"
-            value={value as string}
-            onChange={(e) => onChange(fieldName, e.target.value)}
-          >
-            {options.map((opt) => (
-              <option key={opt.id} value={opt.id}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
-        </div>
-      );
-
-    case "json-editor":
-      return (
-        <div className="flex flex-col">
-          <label className="text-sm font-medium">{fieldName}</label>
-          <textarea
-            className="border p-2 rounded font-mono text-sm"
-            rows={5}
-            value={JSON.stringify(value ?? {}, null, 2)}
-            onChange={(e) => {
-              try {
-                onChange(fieldName, JSON.parse(e.target.value));
-              } catch (err) {
-                console.error("Invalid JSON", err);
-              }
-            }}
           />
         </div>
       );

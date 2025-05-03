@@ -77,6 +77,7 @@ export function FormRenderer({
       {view.fields.map((fieldName) => {
         const override = view.fieldOverrides?.[fieldName];
         const inputType = override?.inputType ?? "text";
+        const targetEntity = override?.target;
         const value = formState[fieldName] ?? "";
 
         return (
@@ -87,6 +88,7 @@ export function FormRenderer({
             value={value}
             onChange={handleChange}
             override={override}
+            targetEntity={targetEntity}
           />
         );
       })}

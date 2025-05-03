@@ -13,7 +13,8 @@
       "priority",
       "vector",
       "temporality",
-      "context"
+      "context",
+      "apex_convergence"
     ],
     "fieldOverrides": {
       "status": {
@@ -37,6 +38,10 @@
       "context": {
         "inputType": "select",
         "options": ["AM", "PM", "Weekend", "Late", "Work"]
+      },
+      "apex_convergence": {
+        "inputType": "reference-select",
+        "target": "convergence"
       }
     },
     "filters": {},
@@ -108,8 +113,12 @@
     "description": "Form for editing an existing Convergence.",
     "targetEntity": "convergence",
     "layout": "form",
-    "fields": ["title", "description", "time"],
-    "fieldOverrides": {},
+    "fields": ["title", "description", "time", "vector"],
+    "fieldOverrides": {
+      "vector": {
+        "inputType": "checkbox"
+      }
+    },
     "filters": {},
     "sort": [],
     "groupBy": null,
