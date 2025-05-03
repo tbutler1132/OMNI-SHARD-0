@@ -12,6 +12,7 @@ interface FormRendererProps {
   mode?: "create" | "edit";
   onSuccess?: () => void;
   onError?: (err: Error) => void;
+  referenceOptions?: Record<string, { id: string; label: string }[]>;
 }
 
 export function FormRenderer({
@@ -20,6 +21,7 @@ export function FormRenderer({
   mode = "create",
   onSuccess,
   onError,
+  referenceOptions = {},
 }: FormRendererProps) {
   const [formState, setFormState] =
     useState<Record<string, unknown>>(initialValues);
@@ -87,6 +89,7 @@ export function FormRenderer({
             value={value}
             onChange={handleChange}
             override={override}
+            options={referenceOptions[fieldName]}
           />
         );
       })}
