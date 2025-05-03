@@ -2,6 +2,7 @@ import { loadEntities } from "@/lib/ontology/loadEntity";
 import { loadView } from "@/lib/loadView";
 import { CalendarGridRenderer } from "@/components/renderers/CalendarGridRenderer";
 
+//TODO: This is temporary/incomplete
 export default async function ConvergenceListPage() {
   const view = await loadView("view-calendar-monthly-convergences"); // Load your form View
   const convergences = await loadEntities(view.targetEntity);

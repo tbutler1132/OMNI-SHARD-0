@@ -13,7 +13,8 @@
       "priority",
       "vector",
       "temporality",
-      "context"
+      "context",
+      "apex_convergence"
     ],
     "fieldOverrides": {
       "status": {
@@ -37,13 +38,17 @@
       "context": {
         "inputType": "select",
         "options": ["AM", "PM", "Weekend", "Late", "Work"]
+      },
+      "apex_convergence": {
+        "inputType": "reference-select",
+        "target": "convergence"
       }
     },
-    "filters": {},
+    "filters": [],
     "sort": [],
     "groupBy": null,
     "actions": ["behavior-create-convergence"],
-    "rendererComponent": "artifact-form-renderer",
+    "rendererComponent": null,
     "schemaVersion": 1
   },
   {
@@ -64,7 +69,7 @@
       "vector"
     ],
     "fieldOverrides": {},
-    "filters": {},
+    "filters": [],
     "sort": [],
     "groupBy": null,
     "actions": [],
@@ -93,7 +98,7 @@
         "inputType": "datetime"
       }
     },
-    "filters": {},
+    "filters": [],
     "sort": [{ "field": "createdAt", "order": "desc" }],
     "groupBy": null,
     "actions": [],

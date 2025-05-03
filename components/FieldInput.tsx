@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 interface FieldInputProps {
   fieldName: string;
   inputType: string;
   value: unknown;
   onChange: (field: string, value: unknown) => void;
   override?: { options?: string[] };
+  options?: { id: string; label: string }[];
 }
 
 export function FieldInput({
@@ -16,24 +15,8 @@ export function FieldInput({
   value,
   onChange,
   override,
+  options = [],
 }: FieldInputProps) {
-  const [options, setOptions] = useState<{ id: string; label: string }[]>([]);
-
-  // Optionally fetch options if it's a reference field
-  useEffect(() => {
-    if (
-      inputType === "reference-select" ||
-      inputType === "reference-multi-select"
-    ) {
-      // TODO: Replace with your real DB fetch!
-      setOptions([
-        { id: "example-1", label: "Example 1" },
-        { id: "example-2", label: "Example 2" },
-      ]);
-    }
-  }, [inputType]);
-
-  // Render fields based on inputType
   switch (inputType) {
     case "select":
       return (
@@ -41,9 +24,10 @@ export function FieldInput({
           <label className="text-sm font-medium">{fieldName}</label>
           <select
             className="border p-2 rounded"
-            value={value as string}
+            value={(value as string) || ""}
             onChange={(e) => onChange(fieldName, e.target.value)}
           >
+            <option value="">Select...</option>
             {override?.options?.map((option: string) => (
               <option key={option} value={option}>
                 {option}
@@ -100,6 +84,7 @@ export function FieldInput({
             value={value as string}
             onChange={(e) => onChange(fieldName, e.target.value)}
           >
+            <option value="">Select...</option>
             {options.map((opt) => (
               <option key={opt.id} value={opt.id}>
                 {opt.label}
