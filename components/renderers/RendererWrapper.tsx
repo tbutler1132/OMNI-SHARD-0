@@ -1,6 +1,6 @@
 import { loadView } from "@/lib/loadView";
-import { loadEntityWithView } from "@/lib/ontology/loadEntityWithView";
-import { loadEntityById } from "@/lib/ontology/loadEntity";
+import { loadEntityWithView } from "@/lib/persistence/loadEntityWithView";
+import { loadEntityById } from "@/lib/persistence/loadEntity";
 import { getReferenceOptions } from "@/lib/ontology/loadReferenceOptions";
 import { FormRenderer } from "@/components/renderers/FormRenderer";
 import { ListRenderer } from "@/components/renderers/ListRenderer";

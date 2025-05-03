@@ -1,4 +1,4 @@
-import { loadEntities } from "@/lib/ontology/loadEntity";
+import { loadEntities } from "@/lib/persistence/loadEntity";
 import { loadView } from "@/lib/loadView";
 import { CalendarGridRenderer } from "@/components/renderers/CalendarGridRenderer";
 

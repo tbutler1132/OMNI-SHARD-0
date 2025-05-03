@@ -1,7 +1,8 @@
 "use server";
 
-import { insertEntity } from "./insertEntity";
-import { updateEntity as updateEntityPersistence } from "./updateEntity";
+import { insertEntity } from "./persistence/insertEntity";
+import { updateEntity as updateEntityPersistence } from "./persistence/updateEntity";
+import { validateAndPrepareEntity } from "@/lib/ontology/validateAndPrepareEntity";
 
 /**
  * @semantic Behavior
@@ -12,13 +13,7 @@ export async function createEntity(
   targetEntity: string,
   data: Record<string, unknown>
 ) {
-  //TODO: Add validation against the schema right here
-
-  const entity = {
-    id: `${targetEntity}-${Date.now()}`,
-    createdAt: new Date().toISOString(),
-    ...data,
-  };
+  const entity = await validateAndPrepareEntity(targetEntity, data);
 
   await insertEntity(targetEntity, entity);
 

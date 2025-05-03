@@ -18,6 +18,7 @@ export function ListRenderer({ view, data }: ListRendererProps) {
               <span>{String(entity[field] ?? "")}</span>
             </div>
           ))}
+          <br />
         </div>
       ))}
     </div>

@@ -1,5 +1,5 @@
 import { View } from "@/types/ontology/view";
-import { query } from "@/lib/ontology/db";
+import { query } from "@/lib/db";
 
 function buildWhereClause(filters: View["filters"]): {
   sql: string;

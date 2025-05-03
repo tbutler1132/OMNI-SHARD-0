@@ -14,7 +14,8 @@
       "vector",
       "temporality",
       "context",
-      "apex_convergence"
+      "apex_convergence",
+      "horizon"
     ],
     "fieldOverrides": {
       "status": {
@@ -42,6 +43,9 @@
       "apex_convergence": {
         "inputType": "reference-select",
         "target": "convergence"
+      },
+      "horizon": {
+        "inputType": "number"
       }
     },
     "filters": [],
@@ -99,7 +103,7 @@
       }
     },
     "filters": [],
-    "sort": [{ "field": "createdAt", "order": "desc" }],
+    "sort": [{ "field": "created_at", "order": "desc" }],
     "groupBy": null,
     "actions": [],
     "rendererComponent": null,
@@ -145,7 +149,7 @@
       }
     },
     "filters": {},
-    "sort": [{ "field": "createdAt", "order": "desc" }],
+    "sort": [{ "field": "created_at", "order": "desc" }],
     "groupBy": null,
     "actions": [],
     "rendererComponent": null,
@@ -182,7 +186,7 @@
         "operator": "isNotNull"
       }
     ],
-    "sort": [{ "field": "createdAt", "order": "desc" }],
+    "sort": [{ "field": "created_at", "order": "desc" }],
     "groupBy": {
       "field": "priority",
       "order": ["high", "medium", "low"],

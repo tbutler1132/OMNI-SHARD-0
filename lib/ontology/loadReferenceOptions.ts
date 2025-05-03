@@ -1,6 +1,6 @@
 "use server";
 
-import { query } from "@/lib/ontology/db";
+import { query } from "@/lib/db";
 
 export async function getReferenceOptions(entityType: string) {
   const rows = await query(
