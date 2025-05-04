@@ -1,5 +1,5 @@
 import { loadEntities } from "@/lib/persistence/loadEntity";
-import { loadView } from "@/lib/loadView";
+import { loadView } from "@/lib/ontology/loadView";
 import { CalendarGridRenderer } from "@/components/renderers/CalendarGridRenderer";
 
 //TODO: This is temporary/incomplete

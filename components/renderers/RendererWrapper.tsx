@@ -1,4 +1,4 @@
-import { loadView } from "@/lib/loadView";
+import { loadView } from "@/lib/ontology/loadView";
 import { loadEntityWithView } from "@/lib/persistence/loadEntityWithView";
 import { loadEntityById } from "@/lib/persistence/loadEntity";
 import { getReferenceOptions } from "@/lib/ontology/loadReferenceOptions";

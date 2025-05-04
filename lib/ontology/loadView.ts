@@ -1,4 +1,4 @@
-import { query } from "./db";
+import { query } from "../db";
 import { View } from "@/types/ontology/view";
 
 export async function loadView(viewId: string): Promise<View> {
@@ -10,8 +10,6 @@ export async function loadView(viewId: string): Promise<View> {
   if (!result.length) {
     throw new Error(`View not found in DB: ${viewId}`);
   }
-
-  console.log("Loaded view from DB", result[0].content);
 
   return result[0].content as View;
 }
