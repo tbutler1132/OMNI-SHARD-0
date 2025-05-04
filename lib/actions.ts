@@ -3,6 +3,7 @@
 import { insertEntity } from "./persistence/insertEntity";
 import { updateEntity as updateEntityPersistence } from "./persistence/updateEntity";
 import { validateAndPrepareEntity } from "@/lib/ontology/validateAndPrepareEntity";
+import { validateAndPrepareEntityUpdate } from "@/lib/ontology/validateAndPrepareEntity";
 
 /**
  * @semantic Behavior
@@ -31,15 +32,12 @@ export async function updateEntity(
   updatedData: Record<string, unknown>
 ) {
   //TODO: Add validation against the schema right here
-  // const schema = entitySchemas[targetEntity];
+  const updatedEntity = await validateAndPrepareEntityUpdate(
+    targetEntity,
+    updatedData
+  );
 
-  // if (!schema) {
-  //   throw new Error(`No schema registered for entity type: ${targetEntity}`);
-  // }
-
-  // validateAgainstSemanticSchema(updatedData, schema);
-
-  await updateEntityPersistence(targetEntity, id, updatedData);
+  await updateEntityPersistence(targetEntity, id, updatedEntity);
 
   return { id, ...updatedData };
 }

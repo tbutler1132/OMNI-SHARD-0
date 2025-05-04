@@ -63,13 +63,19 @@ export function FieldInput({
       );
 
     case "datetime":
+      const datetimeValue =
+        typeof value === "string"
+          ? value
+          : value instanceof Date
+          ? value.toISOString().slice(0, 16)
+          : "";
       return (
         <div className="flex flex-col">
           <label className="text-sm font-medium">{fieldName}</label>
           <input
             type="datetime-local"
             className="border p-2 rounded"
-            value={value as string}
+            value={datetimeValue}
             onChange={(e) => onChange(fieldName, e.target.value)}
           />
         </div>

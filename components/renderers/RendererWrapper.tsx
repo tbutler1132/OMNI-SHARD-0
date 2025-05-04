@@ -8,6 +8,7 @@ import { BoardRenderer } from "@/components/renderers/BoardRenderer";
 import { CalendarRenderer } from "@/components/renderers/CalendarRenderer";
 import { DetailRenderer } from "@/components/renderers/DetailRenderer";
 import { View } from "@/types/ontology/view";
+import { normalizeInitialValues } from "@/lib/utils/normalizeInitialValues";
 
 interface RendererWrapperProps {
   viewId: string;
@@ -39,12 +40,16 @@ export default async function RendererWrapper({
 
     if (view.actions?.some((a) => a.includes("update")) && entityId) {
       const initialValues = await loadEntityById(view.targetEntity, entityId);
+      const normalizedInitialValues = normalizeInitialValues(
+        initialValues,
+        view
+      );
       return (
         <FormRenderer
           view={view}
           referenceOptions={referenceOptions}
           mode="edit"
-          initialValues={initialValues}
+          initialValues={normalizedInitialValues}
         />
       );
     }

@@ -14,15 +14,6 @@ function validateRequired(
 }
 
 function validateType(field: FieldDefinition, value: unknown): string | null {
-  console.log(
-    "Validating",
-    field.name,
-    "with value:",
-    value,
-    "and type:",
-    typeof value
-  );
-
   if (value === undefined || value === null) return null;
 
   const typeMap: Record<string, string> = {
