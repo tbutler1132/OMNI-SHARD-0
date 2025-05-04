@@ -1,19 +1,17 @@
-import fs from "fs/promises";
-import path from "path";
-import { View } from "../types/ontology/view"; // Your generated View type
+import { query } from "./db";
+import { View } from "@/types/ontology/view";
 
-//TODO: Move this into loadEntity.ts
 export async function loadView(viewId: string): Promise<View> {
-  const viewStorePath = path.resolve("data/entities/view/view.local.json");
+  const result = await query(
+    `SELECT content FROM views WHERE id = $1 LIMIT 1`,
+    [viewId]
+  );
 
-  const raw = await fs.readFile(viewStorePath, "utf-8");
-  const views: View[] = JSON.parse(raw);
-
-  const found = views.find((v) => v.id === viewId);
-
-  if (!found) {
-    throw new Error(`View not found: ${viewId}`);
+  if (!result.length) {
+    throw new Error(`View not found in DB: ${viewId}`);
   }
 
-  return found;
+  console.log("Loaded view from DB", result[0].content);
+
+  return result[0].content as View;
 }
