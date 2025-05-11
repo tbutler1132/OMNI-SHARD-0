@@ -9,6 +9,7 @@ interface BoardRendererProps {
 }
 
 export function BoardRenderer({ view, data }: BoardRendererProps) {
+  console.log("BoardRenderer", data);
   const groupField = view.groupBy?.field;
   const subGroupField = view.subGroupBy?.field;
 

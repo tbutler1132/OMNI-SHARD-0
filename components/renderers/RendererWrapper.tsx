@@ -1,6 +1,8 @@
-import { loadView } from "@/lib/ontology/loadView";
-import { loadEntityWithView } from "@/lib/persistence/loadEntityWithView";
-import { loadEntityById } from "@/lib/persistence/loadEntity";
+// import { loadView } from "@/lib/ontology/loadView";
+// import { loadEntityWithView } from "@/lib/persistence/loadEntityWithView";
+import { loadEntityWithView, loadEntityById } from "@/lib/persistence/entity";
+import { toRenderableEntity } from "@/lib/utils/toRenderableEntity";
+// import { loadEntityById } from "@/lib/persistence/loadEntity";
 import { getReferenceOptions } from "@/lib/ontology/loadReferenceOptions";
 import { FormRenderer } from "@/components/renderers/FormRenderer";
 import { ListRenderer } from "@/components/renderers/ListRenderer";
@@ -21,7 +23,8 @@ export default async function RendererWrapper({
   entityId,
   extraRendererProps = {},
 }: RendererWrapperProps) {
-  const view: View = await loadView(viewId);
+  const raw = await loadEntityById("view", viewId);
+  const view = raw as unknown as View;
   const layout = view.rendererComponent ?? view.layout;
 
   if (layout === "form") {
@@ -63,9 +66,8 @@ export default async function RendererWrapper({
     );
   }
 
-  //TODO: Change this to use loadEntityWithView
-  //   const data = await loadEntities(view.targetEntity);
-  const data = await loadEntityWithView(view);
+  const rawData = await loadEntityWithView(view);
+  const data = rawData.map(toRenderableEntity);
 
   switch (layout) {
     case "list":
@@ -75,8 +77,10 @@ export default async function RendererWrapper({
     case "calendar":
       return <CalendarRenderer view={view} data={data} />;
     case "detail":
-      const entity =
-        entityId && (await loadEntityById(view.targetEntity, entityId));
+      const raw = entityId
+        ? await loadEntityById(view.targetEntity, entityId)
+        : undefined;
+      const entity = toRenderableEntity(raw);
       return <DetailRenderer view={view} data={entity} />;
     default:
       return <div>⚠️ No renderer found for layout: {layout}</div>;

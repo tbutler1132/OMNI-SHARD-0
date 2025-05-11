@@ -60,15 +60,80 @@ export async function loadReferenceOptions(
   }));
 }
 
+export type ViewFilter = {
+  field: string;
+  value?: unknown;
+  operator:
+    | "equals"
+    | "notEquals"
+    | "isNotNull"
+    | "isNull"
+    | "in"
+    | "notIn"
+    | "gt"
+    | "lt"
+    | "gte"
+    | "lte"
+    | "contains";
+};
+
 export async function loadEntityWithView(
   view: View
 ): Promise<Record<string, unknown>[]> {
   const data = await loadEntities(view.targetEntity);
 
-  // Optionally apply view.filters if present
-  if (view.filters) {
+  if (Array.isArray(view.filters)) {
     return data.filter((item) =>
-      Object.entries(view.filters!).every(([key, value]) => item[key] === value)
+      view.filters.every(({ field, value, operator }: ViewFilter) => {
+        const entityValue = item[field];
+
+        switch (operator) {
+          case "equals":
+            return String(entityValue) === String(value);
+          case "notEquals":
+            return String(entityValue) !== String(value);
+          case "isNotNull":
+            return entityValue !== null && entityValue !== undefined;
+          case "isNull":
+            return entityValue === null || entityValue === undefined;
+          case "in":
+            return Array.isArray(value) && value.includes(entityValue);
+          case "notIn":
+            return Array.isArray(value) && !value.includes(entityValue);
+          case "gt":
+            return (
+              typeof entityValue === "number" &&
+              typeof value === "number" &&
+              entityValue > value
+            );
+          case "lt":
+            return (
+              typeof entityValue === "number" &&
+              typeof value === "number" &&
+              entityValue < value
+            );
+          case "gte":
+            return (
+              typeof entityValue === "number" &&
+              typeof value === "number" &&
+              entityValue >= value
+            );
+          case "lte":
+            return (
+              typeof entityValue === "number" &&
+              typeof value === "number" &&
+              entityValue <= value
+            );
+          case "contains":
+            return (
+              typeof entityValue === "string" &&
+              typeof value === "string" &&
+              entityValue.includes(value)
+            );
+          default:
+            return true;
+        }
+      })
     );
   }
 

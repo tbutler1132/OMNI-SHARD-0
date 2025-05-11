@@ -16,7 +16,7 @@ export interface View {
     };
   };
 
-  filters?: {
+  filters: {
     field: string;
     operator:
       | "equals"
