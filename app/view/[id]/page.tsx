@@ -1,6 +1,6 @@
 // app/view/[viewId]/page.tsx
 
-import RendererWrapper from "@/components/renderers/RendererWrapper";
+import RendererWrapper from "@/app/components/renderers/RendererWrapper";
 
 export default async function ViewPage({
   params,

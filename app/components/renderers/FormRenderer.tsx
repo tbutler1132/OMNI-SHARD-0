@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { View } from "../../types/ontology/view";
-import { createEntity, updateEntity } from "../../lib/actions";
+import { View } from "../../../types/ontology/view";
+import { createEntity, updateEntity } from "../../../lib/actions";
 import { FieldInput } from "../FieldInput";
 import styles from "./FormRenderer.module.css";
 

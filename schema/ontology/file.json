@@ -1,9 +1,0 @@
-{
-  "entity": "File",
-  "version": 1,
-  "description": "A file in the project’s structure.",
-  "fields": [
-    { "name": "id", "type": "string" },
-    { "name": "path", "type": "string" }
-  ]
-}

@@ -2,11 +2,11 @@ import { loadView } from "@/lib/ontology/loadView";
 import { loadEntityWithView } from "@/lib/persistence/loadEntityWithView";
 import { loadEntityById } from "@/lib/persistence/loadEntity";
 import { getReferenceOptions } from "@/lib/ontology/loadReferenceOptions";
-import { FormRenderer } from "@/components/renderers/FormRenderer";
-import { ListRenderer } from "@/components/renderers/ListRenderer";
-import { BoardRenderer } from "@/components/renderers/BoardRenderer";
-import { CalendarRenderer } from "@/components/renderers/CalendarRenderer";
-import { DetailRenderer } from "@/components/renderers/DetailRenderer";
+import { FormRenderer } from "@/app/components/renderers/FormRenderer";
+import { ListRenderer } from "@/app/components/renderers/ListRenderer";
+import { BoardRenderer } from "@/app/components/renderers/BoardRenderer";
+import { CalendarRenderer } from "@/app/components/renderers/CalendarRenderer";
+import { DetailRenderer } from "@/app/components/renderers/DetailRenderer";
 import { View } from "@/types/ontology/view";
 import { normalizeInitialValues } from "@/lib/utils/normalizeInitialValues";
 
