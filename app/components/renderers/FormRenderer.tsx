@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { View } from "../../../types/ontology/view";
-import { createEntity, updateEntity } from "../../../lib/actions";
+import { createEntity, updateEntity } from "../../../core/actions";
 import { FieldInput } from "../FieldInput";
 import styles from "./FormRenderer.module.css";
 

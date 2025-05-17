@@ -1,4 +1,4 @@
-import { query } from "../lib/db";
+import { query } from "../core/db";
 import views from "../data/entities/view/view.local.json"; // Adjust path as needed
 
 async function importViews() {
