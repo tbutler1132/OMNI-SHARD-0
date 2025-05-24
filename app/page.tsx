@@ -1,6 +1,8 @@
 // import styles from "./page.module.css";
-import { redirect } from "next/navigation";
 
 export default function Home() {
-  return redirect("/convergence/vectors");
+  <div>
+    <h1>Home</h1>
+    <p>Welcome home</p>
+  </div>;
 }
