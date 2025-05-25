@@ -1,4 +1,5 @@
 import ListRenderer from "./ListRenderer";
+import FormRenderer from "./FormRenderer";
 import { AnyEntity, Entity } from "@/types/entity";
 
 type RendererWrapperProps = {
@@ -16,6 +17,8 @@ const RendererWrapper = async ({ viewId }: RendererWrapperProps) => {
   switch (layout) {
     case "list":
       return <ListRenderer data={entities} />;
+    case "form":
+      return <FormRenderer />;
     default:
       return <div>⚠️ No renderer found for layout: {layout}</div>;
   }

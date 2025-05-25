@@ -4,7 +4,7 @@
 
 export interface ViewEssence {
   name: string;
-  layout: "list" | "board" | "calendar";
+  layout: "list" | "board" | "calendar" | "form";
   targetEntityType: string;
 }
 
