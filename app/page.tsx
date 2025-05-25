@@ -1,8 +1,9 @@
-// import styles from "./page.module.css";
+const Home = () => {
+  return (
+    <div>
+      <h1>Home</h1>
+    </div>
+  );
+};
 
-export default function Home() {
-  <div>
-    <h1>Home</h1>
-    <p>Welcome home</p>
-  </div>;
-}
+export default Home;
