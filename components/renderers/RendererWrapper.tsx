@@ -6,6 +6,7 @@ type RendererWrapperProps = {
 };
 
 const RendererWrapper = async ({ viewId }: RendererWrapperProps) => {
+  //TODO: Maybe move this to a custom hook
   const data = await fetch(
     `http://localhost:3000/api/behaviors/behavior-fetch-entities-by-view`,
     {
