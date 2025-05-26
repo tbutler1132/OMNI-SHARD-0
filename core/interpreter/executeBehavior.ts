@@ -43,7 +43,7 @@ function resolveInput(
 function resolveValue(val: unknown, context: ExecutionContext): unknown {
   if (
     typeof val === "string" &&
-    (val.startsWith("$inputs.") || /^[a-zA-Z0-9_-]+\./.test(val))
+    (val.startsWith("$inputs.") || /^[a-zA-Z0-9_-]+(\.|$)/.test(val))
   ) {
     const [source, ...path] = val.split(".");
     const base =
@@ -59,6 +59,8 @@ function resolveValue(val: unknown, context: ExecutionContext): unknown {
     }
     return result;
   }
+
+  console.log("Returning value directly:", val);
 
   return val;
 }

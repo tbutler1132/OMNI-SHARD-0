@@ -11,5 +11,5 @@ export async function POST(
   if (!behavior) return new Response("Behavior not found", { status: 404 });
 
   const result = await executeBehavior(behavior, body.inputs || {});
-  return Response.json(result);
+  return Response.json(result.result);
 }
