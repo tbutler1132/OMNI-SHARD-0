@@ -1,12 +1,14 @@
-import type { Behavior, ExecutionContext } from "./types";
+import { Behavior, ExecutionContext } from "./types";
 import { actionRegistry } from "../actions/actionRegistry";
 
-export async function executeBehavior(
+export const executeBehavior = async (
   behavior: Behavior,
-  inputs: Record<string, unknown>
-): Promise<{ result: unknown; success: boolean }> {
+  inputs: Record<string, string>
+) => {
+  //Initialize the execution context with inputs and an empty steps object
   const context: ExecutionContext = { $inputs: inputs, $steps: {} };
 
+  //Loop through each step in the behavior's essence
   for (const step of behavior.essence.steps) {
     if (!(step.action in actionRegistry)) {
       throw new Error(`Unknown action: ${step.action}`);
@@ -14,6 +16,7 @@ export async function executeBehavior(
     const action = actionRegistry[step.action as keyof typeof actionRegistry];
 
     if (!action) throw new Error(`Unknown action: ${step.action}`);
+
     const resolvedInput = resolveInput(step.input || {}, context);
     const output = await (
       action as (input: unknown, context: ExecutionContext) => Promise<unknown>
@@ -24,7 +27,7 @@ export async function executeBehavior(
 
   const lastStep = behavior.essence.steps.at(-1);
   return { result: context.$steps[lastStep!.id], success: true };
-}
+};
 
 function resolveInput(
   input: Record<string, unknown>,
@@ -45,12 +48,17 @@ function resolveValue(val: unknown, context: ExecutionContext): unknown {
     const [source, ...path] = val.split(".");
     const base =
       source === "$inputs" ? context.$inputs : context.$steps[source];
-    return path.reduce((acc, key) => {
-      if (typeof acc === "object" && acc !== null && key in acc) {
-        return (acc as Record<string, unknown>)[key];
+
+    let result = base;
+    for (const key of path) {
+      if (typeof result === "object" && result !== null && key in result) {
+        result = (result as Record<string, unknown>)[key];
+      } else {
+        return undefined;
       }
-      return undefined;
-    }, base);
+    }
+    return result;
   }
+
   return val;
 }
