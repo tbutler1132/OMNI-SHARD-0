@@ -1,12 +1,13 @@
 export interface ViewEssence {
   name: string;
-  layout: "list" | "board" | "calendar" | "form";
+  layout: "list" | "form";
   targetEntityType: string;
 }
 
 export interface EntityTypeEssence {
   name: string;
   description?: string;
+  traits: unknown[];
 }
 
 // The master type map — keys = .type strings, values = essence types

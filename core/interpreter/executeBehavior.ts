@@ -3,7 +3,7 @@ import { actionRegistry } from "../actions/actionRegistry";
 
 export const executeBehavior = async (
   behavior: Behavior,
-  inputs: Record<string, string>
+  inputs: Record<string, unknown>
 ) => {
   //Initialize the execution context with inputs and an empty steps object
   const context: ExecutionContext = { $inputs: inputs, $steps: {} };
@@ -59,8 +59,6 @@ function resolveValue(val: unknown, context: ExecutionContext): unknown {
     }
     return result;
   }
-
-  console.log("Returning value directly:", val);
 
   return val;
 }

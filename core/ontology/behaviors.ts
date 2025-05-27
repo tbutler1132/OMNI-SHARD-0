@@ -2,57 +2,69 @@ import { Behavior } from "../interpreter/types";
 
 export const behaviors: Behavior[] = [
   {
-    id: "behavior-get-high-priority-convergences",
-    type: "Behavior",
-    essence: {
-      input: {},
-      output: ["sorted"],
-      steps: [
-        {
-          id: "convergences",
-          action: "fetch",
-          input: {
-            type: "Convergence",
-          },
-        },
-        {
-          id: "sorted",
-          action: "emit",
-          input: {
-            message: "Fetched convergences.",
-          },
-        },
-      ],
-    },
-  },
-  {
-    id: "behavior-get-entityTypes",
+    id: "behavior-fetch-entities",
     type: "Behavior",
     essence: {
       input: {
         type: "string",
+        filters: { optional: "object" },
       },
-      output: ["entityTypes"],
+      output: ["entities"],
       steps: [
         {
-          id: "entityTypes",
+          id: "entities",
           action: "fetch",
           input: {
-            id: "$inputs.type",
+            type: "$inputs.type",
+            filters: "$inputs.filters",
+          },
+        },
+        {
+          id: "result",
+          action: "emit",
+          input: {
+            entities: "entities",
           },
         },
       ],
     },
   },
   {
-    id: "behavior-fetch-entities-by-view",
+    id: "behavior-fetch-entity-by-id",
+    type: "Behavior",
+    essence: {
+      input: {
+        id: "string",
+      },
+      output: ["entity"],
+      steps: [
+        {
+          id: "entity",
+          action: "fetch",
+          input: {
+            id: "$inputs.id",
+          },
+        },
+        {
+          id: "result",
+          action: "emit",
+          input: {
+            entity: "entity.0",
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: "behavior-load-form-view",
     type: "Behavior",
     essence: {
       input: {
         viewId: "string",
       },
-      output: ["entities", "view"],
+      output: ["view", "entityType", "traits"],
       steps: [
+        // 1. Load the view
         {
           id: "view",
           action: "fetch",
@@ -60,19 +72,41 @@ export const behaviors: Behavior[] = [
             id: "$inputs.viewId",
           },
         },
+
+        // 2. Load the entity type (by name match)
         {
-          id: "entities",
+          id: "entityType",
           action: "fetch",
           input: {
-            type: "view.0.essence.targetEntityType", // e.g. "Convergence"
+            type: "EntityType",
+            filters: {
+              name: "view.0.essence.targetEntityType",
+            },
           },
         },
+
+        // 3. Resolve traits using reference resolver behavior
         {
-          id: "result",
+          id: "traitResolution",
+          action: "invoke",
+          input: {
+            behaviorId: "behavior-resolve-references",
+            inputs: {
+              entity: "entityType.0",
+              fieldPath: "essence.traits",
+              type: "Trait",
+            },
+          },
+        },
+
+        // 4. Emit result
+        {
+          id: "emit",
           action: "emit",
           input: {
             view: "view.0",
-            entities: "entities",
+            entityType: "entityType.0",
+            traits: "traitResolution.result.references",
           },
         },
       ],

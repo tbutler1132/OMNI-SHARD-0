@@ -1,14 +1,29 @@
 import { query } from "./db";
+import { AnyEntity } from "@/types/entity";
 
 /**
  * @semantic Behavior
  * @id behavior-load-entities
  * @description Loads entities from the database.
  */
-export async function loadEntities(targetEntity: string) {
-  const rows = await query(`SELECT * FROM entity WHERE type = $1`, [
-    targetEntity,
-  ]);
+export async function loadEntities(
+  type: string,
+  filters?: Record<string, string>
+): Promise<AnyEntity[]> {
+  let queryText = `SELECT * FROM entity WHERE type = $1`;
+  const queryParams: string[] = [type];
+
+  if (filters) {
+    const filterClauses = Object.entries(filters).map(([key, value]) => {
+      const paramIndex = queryParams.length + 1;
+      queryParams.push(value);
+      return `essence->>'${key}' = $${paramIndex}`;
+    });
+
+    queryText += ` AND ` + filterClauses.join(" AND ");
+  }
+
+  const rows = await query(queryText, queryParams);
   return rows;
 }
 

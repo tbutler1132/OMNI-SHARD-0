@@ -14,7 +14,7 @@ export type Behavior = {
   id: string;
   type: "Behavior";
   essence: {
-    input?: Record<string, string>;
+    input?: Record<string, unknown>;
     output?: string[];
     steps: Step[];
   };

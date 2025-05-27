@@ -1,16 +1,18 @@
 // import type { ExecutionContext } from "../interpreter/types";
 import { loadEntities, loadEntityById } from "../persistence/loadEntity";
+import { behaviors } from "../ontology/behaviors";
+import { executeBehavior } from "../interpreter/executeBehavior";
 
 export const actionRegistry = {
-  fetch: async (input: { type?: string; id?: string }): Promise<unknown> => {
+  fetch: async (input: {
+    type: string;
+    id?: string;
+    filters?: Record<string, string>;
+  }): Promise<unknown> => {
     if (input.id) {
-      const entity = await loadEntityById(input.id);
-      return entity;
+      return await loadEntityById(input.id);
     }
-    if (input.type) {
-      const entities = await loadEntities(input.type);
-      return entities;
-    }
+    return await loadEntities(input.type, input.filters);
   },
 
   emit: async (
@@ -18,5 +20,17 @@ export const actionRegistry = {
   ): Promise<Record<string, unknown>> => {
     console.log("[EMIT]", input);
     return input;
+  },
+
+  invoke: async (input: {
+    behaviorId: string;
+    inputs: Record<string, unknown>;
+  }) => {
+    const behavior = behaviors.find((b) => b.id === input.behaviorId);
+    if (!behavior) {
+      throw new Error("Behavior not found");
+    }
+    const result = await executeBehavior(behavior, input.inputs);
+    return result.result;
   },
 };
