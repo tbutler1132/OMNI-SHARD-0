@@ -1,6 +1,5 @@
-// import styles from "./page.module.css";
-import { redirect } from "next/navigation";
+import SemanticDashboard from "@/omnilith-core/ui/SemanticDashboard";
 
 export default function Home() {
-  return redirect("/convergence/vectors");
+  return <SemanticDashboard />;
 }
