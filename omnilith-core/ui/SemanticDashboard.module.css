@@ -1,0 +1,38 @@
+.dashboard {
+  padding: 2rem;
+  font-family: sans-serif;
+  background-color: #f9f9f9;
+  color: #222;
+}
+
+.dashboard h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard section {
+  margin-bottom: 2rem;
+}
+
+.card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0.75rem 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.dashboard ul {
+  padding-left: 1rem;
+}
+
+.dashboard li {
+  margin: 0.25rem 0;
+  line-height: 1.4;
+}
