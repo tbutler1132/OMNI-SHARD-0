@@ -7,11 +7,18 @@ export interface ViewEssence {
 export interface EntityTypeEssence {
   name: string;
   description?: string;
-  traits: unknown[];
+  traits: string[];
+}
+
+export interface TraitEssence {
+  name: string;
+  description: string;
+  type: string;
 }
 
 // The master type map — keys = .type strings, values = essence types
 export interface EntityTypeMap {
   View: ViewEssence;
   EntityType: EntityTypeEssence;
+  Trait: TraitEssence;
 }

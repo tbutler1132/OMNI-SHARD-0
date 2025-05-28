@@ -1,26 +1,42 @@
 import { query } from "./db";
 import { AnyEntity } from "@/types/entity";
 
-/**
- * @semantic Behavior
- * @id behavior-load-entities
- * @description Loads entities from the database.
- */
+type FilterValue = string | string[];
+type Filters = Record<string, FilterValue>;
+
 export async function loadEntities(
   type: string,
-  filters?: Record<string, string>
+  filters?: Filters
 ): Promise<AnyEntity[]> {
   let queryText = `SELECT * FROM entity WHERE type = $1`;
-  const queryParams: string[] = [type];
+  const queryParams: (string | string[])[] = [type];
+  const filterClauses: string[] = [];
 
   if (filters) {
-    const filterClauses = Object.entries(filters).map(([key, value]) => {
+    for (const [key, value] of Object.entries(filters)) {
       const paramIndex = queryParams.length + 1;
-      queryParams.push(value);
-      return `essence->>'${key}' = $${paramIndex}`;
-    });
 
-    queryText += ` AND ` + filterClauses.join(" AND ");
+      if (key === "id") {
+        if (Array.isArray(value)) {
+          queryText += ` AND id = ANY($${paramIndex})`;
+          queryParams.push(value);
+        } else {
+          queryText += ` AND id = $${paramIndex}`;
+          queryParams.push(value);
+        }
+      } else {
+        if (Array.isArray(value)) {
+          throw new Error(`Array filters are only supported for 'id'.`);
+        }
+
+        filterClauses.push(`essence->>'${key}' = $${paramIndex}`);
+        queryParams.push(value);
+      }
+    }
+
+    if (filterClauses.length > 0) {
+      queryText += ` AND ` + filterClauses.join(" AND ");
+    }
   }
 
   const rows = await query(queryText, queryParams);

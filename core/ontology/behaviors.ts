@@ -60,53 +60,22 @@ export const behaviors: Behavior[] = [
     type: "Behavior",
     essence: {
       input: {
-        viewId: "string",
+        viewId: "string", // full entity with trait IDs inside
       },
-      output: ["view", "entityType", "traits"],
+      output: ["references"],
       steps: [
-        // 1. Load the view
         {
-          id: "view",
-          action: "fetch",
+          id: "lord",
+          action: "loadFormView",
           input: {
-            id: "$inputs.viewId",
+            viewId: "$inputs.viewId",
           },
         },
-
-        // 2. Load the entity type (by name match)
-        {
-          id: "entityType",
-          action: "fetch",
-          input: {
-            type: "EntityType",
-            filters: {
-              name: "view.0.essence.targetEntityType",
-            },
-          },
-        },
-
-        // 3. Resolve traits using reference resolver behavior
-        {
-          id: "traitResolution",
-          action: "invoke",
-          input: {
-            behaviorId: "behavior-resolve-references",
-            inputs: {
-              entity: "entityType.0",
-              fieldPath: "essence.traits",
-              type: "Trait",
-            },
-          },
-        },
-
-        // 4. Emit result
         {
           id: "emit",
           action: "emit",
           input: {
-            view: "view.0",
-            entityType: "entityType.0",
-            traits: "traitResolution.result.references",
+            entities: "lord",
           },
         },
       ],

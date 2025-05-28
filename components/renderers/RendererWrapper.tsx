@@ -15,10 +15,21 @@ const layoutBehaviorMap = {
     }),
   },
   form: {
+    behavior: "behavior-load-form-view",
+    getInputs: (view: Entity<"View">) => ({
+      viewId: view.id,
+    }),
+  },
+  board: {
     behavior: "behavior-fetch-entities",
     getInputs: (view: Entity<"View">) => ({
-      type: "EntityType",
-      filters: { name: view.essence.targetEntityType },
+      type: view.essence.targetEntityType,
+    }),
+  },
+  calendar: {
+    behavior: "behavior-fetch-entities",
+    getInputs: (view: Entity<"View">) => ({
+      type: view.essence.targetEntityType,
     }),
   },
 };
@@ -28,7 +39,7 @@ const layoutRendererMap = {
     <ListRenderer data={data.entities} />
   ),
   form: (data: { entities: AnyEntity[] }) => (
-    <FormRenderer entityType={data.entities as Entity<"EntityType">[]} />
+    <FormRenderer data={data.entities} />
   ),
   board: (data: { entities: AnyEntity[] }) => (
     <ListRenderer data={data.entities} />
@@ -39,25 +50,25 @@ const layoutRendererMap = {
 };
 
 const RendererWrapper = async ({ viewId }: RendererWrapperProps) => {
-  const { entity } = await invokeBehavior<{ entity: Entity<"View"> }>(
+  const { entity: view } = await invokeBehavior<{ entity: Entity<"View"> }>(
     "behavior-fetch-entity-by-id",
     { id: viewId }
   );
 
-  const layout = entity.essence.layout || "list"; // Default to "list" if not specified
-  const renderer = layoutRendererMap[layout];
+  const layout = view.essence.layout || "list";
   const layoutEntry = layoutBehaviorMap[layout];
+  const renderer = layoutRendererMap[layout];
 
-  if (!layoutEntry) {
-    return <div>⚠️ No behavior for layout: {layout}</div>;
+  if (!layoutEntry || !renderer) {
+    return <div>⚠️ No renderer or behavior for layout: {layout}</div>;
   }
 
-  const data = (await invokeBehavior(
+  const data = await invokeBehavior(
     layoutEntry.behavior,
-    layoutEntry.getInputs(entity)
-  )) as { entities: AnyEntity[] };
+    layoutEntry.getInputs(view)
+  );
 
-  return renderer(data);
+  return renderer(data as { entities: AnyEntity[] });
 };
 
 export default RendererWrapper;
