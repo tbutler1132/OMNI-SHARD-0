@@ -63,12 +63,12 @@ const RendererWrapper = async ({ viewId }: RendererWrapperProps) => {
     return <div>⚠️ No renderer or behavior for layout: {layout}</div>;
   }
 
-  const data = await invokeBehavior(
+  const data: { entities: AnyEntity[] } = await invokeBehavior(
     layoutEntry.behavior,
     layoutEntry.getInputs(view)
   );
 
-  return renderer(data as { entities: AnyEntity[] });
+  return renderer(data);
 };
 
 export default RendererWrapper;
